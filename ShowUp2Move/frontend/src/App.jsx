@@ -33,38 +33,30 @@ const App = () => {
   );
 
   const [users, setUsers] = useState([]);
+
+  const [showProfile, setShowProfile]= useState(false);
+
   const [joinedGroups, setJoinedGroups]= useState([]);
 
-  const [events, setEvents] = useState([]);
+  const [events, setEvents]= useState([]);
+
   const [eventSport, setEventSport]= useState("");
 
   const [eventTime, setEventTime]= useState("");
 
   const [eventArea, setEventArea]= useState("");
 
-  const [showProfile, setShowProfile] = useState(false);
+  const [profileName, setProfileName]= useState("");
 
-  const [profileName, setProfileName] = useState("");
+  const [profileSports, setProfileSports]= useState([]);
 
-  const [profileSports, setProfileSports]
-    = useState([]);
+  const [profileSkill, setProfileSkill]= useState("");
 
-  const [profileSkill, setProfileSkill]
-    = useState("");
+  const [profileYears, setProfileYears]= useState("");
 
-  const [profileYears, setProfileYears]
-    = useState("");
+  const [profileDescription,setProfileDescription]= useState("");
 
-  const [profileDescription,
-    setProfileDescription]
-
-    = useState("");
-
-  const currentUser = users.find(
-
-    user => user.id === currentUserId
-
-  );
+  const currentUser = users.find(user => user.id === currentUserId);
 
   const generatedGroups =
     generateGroups(users);
@@ -124,14 +116,8 @@ const App = () => {
 
           users.map(user =>
 
-            user.id === updatedUser.id
-
-              ? updatedUser
-
-              : user
-
+            user.id === updatedUser.id? updatedUser: user
           )
-
         );
 
       });
@@ -485,150 +471,6 @@ const App = () => {
           <h2 className="section-title">
             Generated Groups
           </h2>
-            <h2 className="section-title">
-  My Groups
-</h2>
-
-<h2 className="section-title">
-  Create Event
-</h2>
-
-<div className="event-form">
-
-  <input
-
-    className="profile-input"
-
-    type="text"
-
-    placeholder="Sport"
-
-    value={eventSport}
-
-    onChange={(e) =>
-      setEventSport(e.target.value)
-    }
-
-  />
-
-  <input
-
-    className="profile-input"
-
-    type="text"
-
-    placeholder="Time"
-
-    value={eventTime}
-
-    onChange={(e) =>
-      setEventTime(e.target.value)
-    }
-
-  />
-
-  <input
-
-    className="profile-input"
-
-    type="text"
-
-    placeholder="Area"
-
-    value={eventArea}
-
-    onChange={(e) =>
-      setEventArea(e.target.value)
-    }
-
-  />
-
-  <button
-
-    className="save-btn"
-
-    onClick={() => {
-
-      const newEvent = {
-
-        id: Date.now(),
-
-        sport: eventSport,
-
-        time: eventTime,
-
-        area: eventArea,
-
-        creator: currentUser.name,
-
-        participants: [
-          currentUser.name
-        ]
-
-      };
-
-      setEvents([
-        ...events,
-        newEvent
-      ]);
-
-      setEventSport("");
-      setEventTime("");
-      setEventArea("");
-
-    }}
-
-  >
-
-    Create Event
-
-  </button>
-
-</div>
-
-<div className="groups-container">
-
-  {generatedGroups
-
-    .filter(group =>
-
-      joinedGroups.includes(
-        group.sport
-      )
-
-    )
-
-    .map(group => (
-
-      <div
-        className="group-card"
-        key={group.sport}
-      >
-
-        <h2>
-          {group.sport}
-        </h2>
-
-        <p>
-
-          Stable Friend Group
-
-        </p>
-
-        <p>
-
-          Captain:
-          {" "}
-          {group.captain.name}
-
-        </p>
-
-      </div>
-
-    ))}
-
-</div>
-          
 
           <div className="groups-container">
 
@@ -638,38 +480,6 @@ const App = () => {
                 className="group-card"
                 key={group.sport}
               >
-
-                <button
-
-  className="join-btn"
-
-  onClick={() => {
-
-    if(
-
-      !joinedGroups.includes(
-        group.sport
-      )
-
-    ){
-
-      setJoinedGroups([
-
-        ...joinedGroups,
-
-        group.sport
-
-      ]);
-
-    }
-
-  }}
-
->
-
-  Join Group
-
-</button>
 
                 <h2>
                   {group.sport} Group
@@ -714,6 +524,282 @@ const App = () => {
                   ))}
 
                 </ul>
+
+                <button
+
+                  className="join-btn"
+
+                  onClick={() => {
+
+                    if(
+
+                      !joinedGroups.includes(
+                        group.sport
+                      )
+
+                    ){
+
+                      setJoinedGroups([
+
+                        ...joinedGroups,
+
+                        group.sport
+
+                      ]);
+
+                    }
+
+                  }}
+
+                >
+
+                  Join Group
+
+                </button>
+
+              </div>
+
+            ))}
+
+          </div>
+
+          <h2 className="section-title">
+            My Groups
+          </h2>
+
+          <div className="groups-container">
+
+            {generatedGroups
+
+              .filter(group =>
+
+                joinedGroups.includes(
+                  group.sport
+                )
+
+              )
+
+              .map(group => (
+
+                <div
+                  className="group-card"
+                  key={group.sport}
+                >
+
+                  <h2>
+                    {group.sport}
+                  </h2>
+
+                  <p>
+                    Stable Friend Group
+                  </p>
+
+                  <p>
+
+                    Captain:
+                    {" "}
+                    {group.captain.name}
+
+                  </p>
+
+                </div>
+
+              ))}
+
+          </div>
+
+          <h2 className="section-title">
+            Create Event
+          </h2>
+
+          <div className="event-form">
+
+            <input
+
+              className="profile-input"
+
+              type="text"
+
+              placeholder="Sport"
+
+              value={eventSport}
+
+              onChange={(e) =>
+                setEventSport(
+                  e.target.value
+                )
+              }
+
+            />
+
+            <input
+
+              className="profile-input"
+
+              type="text"
+
+              placeholder="Time"
+
+              value={eventTime}
+
+              onChange={(e) =>
+                setEventTime(
+                  e.target.value
+                )
+              }
+
+            />
+
+            <input
+
+              className="profile-input"
+
+              type="text"
+
+              placeholder="Area"
+
+              value={eventArea}
+
+              onChange={(e) =>
+                setEventArea(
+                  e.target.value
+                )
+              }
+
+            />
+
+            <button
+
+              className="save-btn"
+
+              onClick={() => {
+
+                const newEvent = {
+
+                  id: Date.now(),
+
+                  sport: eventSport,
+
+                  time: eventTime,
+
+                  area: eventArea,
+
+                  creator:
+                    currentUser.name,
+
+                  participants: [
+                    currentUser.name
+                  ]
+
+                };
+
+                setEvents([
+                  ...events,
+                  newEvent
+                ]);
+
+                setEventSport("");
+                setEventTime("");
+                setEventArea("");
+
+              }}
+
+            >
+
+              Create Event
+
+            </button>
+
+          </div>
+
+          <h2 className="section-title">
+            Upcoming Events
+          </h2>
+
+          <div className="groups-container">
+
+            {events.map(event => (
+
+              <div
+                className="group-card"
+                key={event.id}
+              >
+
+                <h2>
+                  {event.sport}
+                </h2>
+
+                <p>
+
+                  <strong>Time:</strong>
+                  {" "}
+                  {event.time}
+
+                </p>
+
+                <p>
+
+                  <strong>Area:</strong>
+                  {" "}
+                  {event.area}
+
+                </p>
+
+                <p>
+
+                  <strong>Organizer:</strong>
+                  {" "}
+                  {event.creator}
+
+                </p>
+
+                <p>
+
+                  <strong>Participants:</strong>
+                  {" "}
+                  {event.participants.length}
+
+                </p>
+
+                <button
+
+                  className="join-btn"
+
+                  onClick={() => {
+
+                    setEvents(
+
+                      events.map(e =>
+
+                        e.id === event.id
+
+                          ? {
+
+                              ...e,
+
+                              participants: [
+
+                                ...e.participants,
+
+                                currentUser.name
+
+                              ]
+
+                            }
+
+                          : e
+
+                      )
+
+                    );
+
+                  }}
+
+                >
+
+                  Confirm Participation
+
+                </button>
 
               </div>
 

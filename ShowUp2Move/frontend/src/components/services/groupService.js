@@ -12,11 +12,15 @@ export const generateGroups = (users) => {
 
     if(user.available){
 
-      if(sportsGroups[user.sport]){
+      user.sports?.forEach(sport => {
 
-        sportsGroups[user.sport].push(user);
+        if(sportsGroups[sport]){
 
-      }
+          sportsGroups[sport].push(user);
+
+        }
+
+      });
 
     }
 
@@ -27,9 +31,25 @@ export const generateGroups = (users) => {
     .map(([sport, players]) => {
 
       if(players.length === 0){
+
         return null;
+
       }
+
+      const maxPlayers =
+
+        sport === "Football"
+
+          ? 14
+
+          : sport === "Basketball"
+
+          ? 10
+
+          : 4;
+
       const captain =
+
         players[
           Math.floor(
             Math.random() * players.length
@@ -37,15 +57,24 @@ export const generateGroups = (users) => {
         ];
 
       return {
+
         sport,
-        players,
+
+        players:
+          players.slice(0, maxPlayers),
+
+        waitingList:
+
+          players.length > maxPlayers
+
+            ? players.slice(maxPlayers)
+
+            : [],
+
         captain,
-        maxPlayers:
-          sport === "Football"
-            ? 14
-            : sport === "Basketball"
-            ? 10
-            : 4
+
+        maxPlayers
+
       };
 
     })
