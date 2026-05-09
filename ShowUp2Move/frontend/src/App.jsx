@@ -33,6 +33,14 @@ const App = () => {
   );
 
   const [users, setUsers] = useState([]);
+  const [joinedGroups, setJoinedGroups]= useState([]);
+
+  const [events, setEvents] = useState([]);
+  const [eventSport, setEventSport]= useState("");
+
+  const [eventTime, setEventTime]= useState("");
+
+  const [eventArea, setEventArea]= useState("");
 
   const [showProfile, setShowProfile] = useState(false);
 
@@ -477,6 +485,150 @@ const App = () => {
           <h2 className="section-title">
             Generated Groups
           </h2>
+            <h2 className="section-title">
+  My Groups
+</h2>
+
+<h2 className="section-title">
+  Create Event
+</h2>
+
+<div className="event-form">
+
+  <input
+
+    className="profile-input"
+
+    type="text"
+
+    placeholder="Sport"
+
+    value={eventSport}
+
+    onChange={(e) =>
+      setEventSport(e.target.value)
+    }
+
+  />
+
+  <input
+
+    className="profile-input"
+
+    type="text"
+
+    placeholder="Time"
+
+    value={eventTime}
+
+    onChange={(e) =>
+      setEventTime(e.target.value)
+    }
+
+  />
+
+  <input
+
+    className="profile-input"
+
+    type="text"
+
+    placeholder="Area"
+
+    value={eventArea}
+
+    onChange={(e) =>
+      setEventArea(e.target.value)
+    }
+
+  />
+
+  <button
+
+    className="save-btn"
+
+    onClick={() => {
+
+      const newEvent = {
+
+        id: Date.now(),
+
+        sport: eventSport,
+
+        time: eventTime,
+
+        area: eventArea,
+
+        creator: currentUser.name,
+
+        participants: [
+          currentUser.name
+        ]
+
+      };
+
+      setEvents([
+        ...events,
+        newEvent
+      ]);
+
+      setEventSport("");
+      setEventTime("");
+      setEventArea("");
+
+    }}
+
+  >
+
+    Create Event
+
+  </button>
+
+</div>
+
+<div className="groups-container">
+
+  {generatedGroups
+
+    .filter(group =>
+
+      joinedGroups.includes(
+        group.sport
+      )
+
+    )
+
+    .map(group => (
+
+      <div
+        className="group-card"
+        key={group.sport}
+      >
+
+        <h2>
+          {group.sport}
+        </h2>
+
+        <p>
+
+          Stable Friend Group
+
+        </p>
+
+        <p>
+
+          Captain:
+          {" "}
+          {group.captain.name}
+
+        </p>
+
+      </div>
+
+    ))}
+
+</div>
+          
 
           <div className="groups-container">
 
@@ -486,6 +638,38 @@ const App = () => {
                 className="group-card"
                 key={group.sport}
               >
+
+                <button
+
+  className="join-btn"
+
+  onClick={() => {
+
+    if(
+
+      !joinedGroups.includes(
+        group.sport
+      )
+
+    ){
+
+      setJoinedGroups([
+
+        ...joinedGroups,
+
+        group.sport
+
+      ]);
+
+    }
+
+  }}
+
+>
+
+  Join Group
+
+</button>
 
                 <h2>
                   {group.sport} Group

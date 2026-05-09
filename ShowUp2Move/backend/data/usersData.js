@@ -56,6 +56,48 @@ let users = [
     skillLevel: "Intermediate",
 
     yearsPlaying: 1
+  },
+  {
+    id:4,
+    name: "Andrei",
+    sports: [
+      "Football",
+      "Tennis"
+    ],    
+    description:
+      "Looking for casual games",
+    available: true, 
+    skillLevel: "Beginner",
+    yearsPlaying: 1,
+  },
+
+  {
+    id: 5,
+
+    name: "Ioana",      
+    
+    sports: [
+      "Basketball",
+      "Tennis"
+    ],   
+    description:
+      "Looking for casual games",
+    available: true,
+    skillLevel: "Beginner",
+    yearsPlaying: 1.5,
+  },
+  {
+    id: 6,
+    name: "Mihai",
+    sports: [
+      "Football",
+      "Tennis"
+    ],
+    description:
+      "Looking for casual games",
+    available: true,    
+    skillLevel: "Beginner",
+    yearsPlaying: 2,
   }
 
 ];
