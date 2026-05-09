@@ -1,18 +1,63 @@
 let users = [
+
   {
     id: 1,
+
     name: "Alex",
-    sport: "Football",
-    description: "I love football and tennis",
-    available: true
+
+    sports: [
+      "Football",
+      "Tennis"
+    ],
+
+    description:
+      "I love football and tennis",
+
+    available: true,
+
+    skillLevel: "Intermediate",
+
+    yearsPlaying: 3
   },
+
   {
     id: 2,
+
     name: "Maria",
-    sport: "Basketball",
-    description: "Looking for casual games",
-    available: false
+
+    sports: [
+      "Basketball"
+    ],
+
+    description:
+      "Looking for casual games",
+
+    available: true,
+
+    skillLevel: "Beginner",
+
+    yearsPlaying: 1
+  },
+
+  {
+    id: 3,
+
+    name: "Radu",
+
+    sports: [
+      "Football"
+    ],
+
+    description:
+      "Looking for casual games",
+
+    available: true,
+
+    skillLevel: "Intermediate",
+
+    yearsPlaying: 1
   }
+
 ];
 
 module.exports = users;
